@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OptiCraft - Bedrock Port</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700;900&family=Russo+One&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['"Noto Sans"', 'sans-serif'],
+              display: ['"Russo One"', 'sans-serif'],
+            },
+            colors: {
+              mc: {
+                green: '#3C8527',
+                greenHover: '#2b6e1b',
+                dark: '#191919',
+                darker: '#121212',
+                gray: '#282828',
+                light: '#F4F4F4',
+                text: '#191919',
+                textDark: '#EDEDED',
+              }
+            },
+            boxShadow: {
+              'mc-btn': '0 4px 0 rgba(0,0,0,0.4)',
+              'mc-btn-active': '0 0 0 rgba(0,0,0,0)',
+              'mc-card': '0 4px 10px rgba(0,0,0,0.3)',
+              'neon': '0 0 10px rgba(60, 133, 39, 0.6), 0 0 20px rgba(60, 133, 39, 0.3)',
+              'neon-hover': '0 0 15px rgba(60, 133, 39, 0.8), 0 0 30px rgba(60, 133, 39, 0.4)',
+            },
+            animation: {
+              'fade-up': 'fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            },
+            keyframes: {
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      * {
+        border-radius: 0 !important;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: 'Noto Sans', sans-serif;
+        background-color: #121212;
+      }
+
+      ::-webkit-scrollbar {
+        width: 10px;
+        background: #191919;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #484848;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #606060;
+      }
+      
+      ::selection {
+        background: #3C8527;
+        color: white;
+      }
+      
+      .minecraft-title {
+        text-shadow: 4px 4px 0px #000000;
+        letter-spacing: 0.05em;
+      }
+
+      .page-enter {
+        animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      /* --- DYNAMIC GRID BACKGROUND --- */
+      /* Slower animation for smoothness (60s instead of 20s) */
+      .bg-grid-moving {
+        background-image: 
+          linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px), 
+          linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px);
+        background-size: 60px 60px;
+        animation: gridMove 60s linear infinite;
+        will-change: background-position;
+      }
+
+      @keyframes gridMove {
+        0% { background-position: 0 0; }
+        100% { background-position: 60px 60px; }
+      }
+
+      /* --- 3D SNOWFALL --- */
+      .snowflake {
+        position: fixed;
+        top: -20px;
+        background-color: white;
+        border-radius: 50%;
+        user-select: none;
+        pointer-events: none;
+        z-index: 9999;
+        will-change: transform;
+        animation-name: snowfall-drop, snowfall-sway;
+        animation-timing-function: linear, ease-in-out;
+        animation-iteration-count: infinite, infinite;
+      }
+
+      @keyframes snowfall-drop {
+        0% { transform: translateY(-20px); }
+        100% { transform: translateY(110vh); }
+      }
+
+      @keyframes snowfall-sway {
+        0%, 100% { margin-left: 0; }
+        50% { margin-left: 50px; }
+      }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.11.0",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "vite": "https://esm.sh/vite@^7.3.0",
+    "@vitejs/plugin-react": "https://esm.sh/@vitejs/plugin-react@^5.1.2"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-mc-dark text-mc-textDark antialiased overflow-x-hidden">
+    <div id="root"></div>
+    <script type="module" src="./index.tsx"></script>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
